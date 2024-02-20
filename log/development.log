@@ -1,0 +1,407 @@
+  [1m[35m (9.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20230824220323)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "phone" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230824220323"]]
+  [1m[36mTRANSACTION (2.8ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateAddresses (20230824220324)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "addresses" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "address" varchar, "district" varchar, "country" varchar, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_48c9e0c5a2"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_addresses_on_user_id" ON "addresses" ("user_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230824220324"]]
+  [1m[36mTRANSACTION (4.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2023-08-24 22:08:06.389527"], ["updated_at", "2023-08-24 22:08:06.389527"]]
+  [1m[36mTRANSACTION (2.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2023-08-25 04:08:18 +0600
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/manon/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/railties-7.0.7.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/manon/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/railties-7.0.7.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.9ms | Allocations: 633)
+Completed 200 OK in 24ms (Views: 6.8ms | ActiveRecord: 0.0ms | Allocations: 7393)
+
+
+Started GET "/usrs/new" for ::1 at 2023-08-25 04:08:52 +0600
+  
+ActionController::RoutingError (No route matches [GET] "/usrs/new"):
+  
+Started GET "/users/new" for ::1 at 2023-08-25 04:09:16 +0600
+Processing by UsersController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (Duration: 14.0ms | Allocations: 3957)
+  Rendered users/new.html.erb within layouts/application (Duration: 15.5ms | Allocations: 4275)
+  Rendered layout layouts/application.html.erb (Duration: 319.4ms | Allocations: 94526)
+Completed 200 OK in 373ms (Views: 321.1ms | ActiveRecord: 0.9ms | Allocations: 113159)
+
+
+Started POST "/users" for ::1 at 2023-08-25 04:09:27 +0600
+Processing by UsersController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"name"=>"3wewwe", "phone"=>"fgjhn", "addresses_attributes"=>{"0"=>{"address"=>"ghgh", "district"=>"ghghn", "country"=>"ggvbnhg", "_destroy"=>"1"}}}, "commit"=>"Create User"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:29:in `block in create'
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "phone", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "3wewwe"], ["phone", "fgjhn"], ["created_at", "2023-08-24 22:09:27.351592"], ["updated_at", "2023-08-24 22:09:27.351592"]]
+  ↳ app/controllers/users_controller.rb:29:in `block in create'
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:29:in `block in create'
+Redirected to http://localhost:3000/users/1
+Completed 302 Found in 10ms (ActiveRecord: 2.7ms | Allocations: 4115)
+
+
+Started GET "/users/1" for ::1 at 2023-08-25 04:09:27 +0600
+Processing by UsersController#show as TURBO_STREAM
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:65:in `set_user'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mAddress Load (0.3ms)[0m  [1m[34mSELECT "addresses".* FROM "addresses" WHERE "addresses"."user_id" = ?[0m  [["user_id", 1]]
+  ↳ app/views/users/show.html.erb:13
+  Rendered users/show.html.erb within layouts/application (Duration: 3.8ms | Allocations: 1721)
+  Rendered layout layouts/application.html.erb (Duration: 7.3ms | Allocations: 4259)
+Completed 200 OK in 12ms (Views: 7.6ms | ActiveRecord: 0.5ms | Allocations: 6650)
+
+
+Started GET "/users" for ::1 at 2023-08-25 04:09:36 +0600
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:6
+  Rendered users/_user.html.erb (Duration: 0.5ms | Allocations: 189)
+  Rendered users/index.html.erb within layouts/application (Duration: 4.4ms | Allocations: 1804)
+  Rendered layout layouts/application.html.erb (Duration: 6.5ms | Allocations: 4090)
+Completed 200 OK in 7ms (Views: 6.6ms | ActiveRecord: 0.2ms | Allocations: 4448)
+
+
+Started GET "/addresses" for ::1 at 2023-08-25 04:10:01 +0600
+Processing by AddressesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering addresses/index.html.erb within layouts/application
+  [1m[36mAddress Load (0.2ms)[0m  [1m[34mSELECT "addresses".* FROM "addresses"[0m
+  ↳ app/views/addresses/index.html.erb:6
+  Rendered addresses/index.html.erb within layouts/application (Duration: 2.2ms | Allocations: 1136)
+  Rendered layout layouts/application.html.erb (Duration: 4.6ms | Allocations: 3510)
+Completed 200 OK in 7ms (Views: 5.6ms | ActiveRecord: 0.2ms | Allocations: 4247)
+
+
+Started GET "/addresses/new" for ::1 at 2023-08-25 04:10:04 +0600
+Processing by AddressesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering addresses/new.html.erb within layouts/application
+  Rendered addresses/_form.html.erb (Duration: 1.6ms | Allocations: 1988)
+  Rendered addresses/new.html.erb within layouts/application (Duration: 2.2ms | Allocations: 2283)
+  Rendered layout layouts/application.html.erb (Duration: 3.8ms | Allocations: 4569)
+Completed 200 OK in 5ms (Views: 4.1ms | ActiveRecord: 0.0ms | Allocations: 4906)
+
+
+Started GET "/users/1" for ::1 at 2023-08-25 04:10:15 +0600
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:65:in `set_user'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mAddress Load (0.0ms)[0m  [1m[34mSELECT "addresses".* FROM "addresses" WHERE "addresses"."user_id" = ?[0m  [["user_id", 1]]
+  ↳ app/views/users/show.html.erb:13
+  Rendered users/show.html.erb within layouts/application (Duration: 0.8ms | Allocations: 677)
+  Rendered layout layouts/application.html.erb (Duration: 2.8ms | Allocations: 3163)
+Completed 200 OK in 4ms (Views: 3.1ms | ActiveRecord: 0.1ms | Allocations: 3914)
+
+
+Started GET "/users/new" for ::1 at 2023-08-25 04:10:22 +0600
+Processing by UsersController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (Duration: 2.2ms | Allocations: 1820)
+  Rendered users/new.html.erb within layouts/application (Duration: 2.4ms | Allocations: 1909)
+  Rendered layout layouts/application.html.erb (Duration: 5.5ms | Allocations: 4194)
+Completed 200 OK in 7ms (Views: 6.2ms | ActiveRecord: 0.0ms | Allocations: 4662)
+
+
+Started POST "/users" for ::1 at 2023-08-25 04:10:34 +0600
+Processing by UsersController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"name"=>"3wewwe", "phone"=>"fgjhn", "addresses_attributes"=>{"0"=>{"address"=>"ghgh", "district"=>"ghg", "country"=>"hghg", "_destroy"=>"0"}}}, "commit"=>"Create User"}
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:29:in `block in create'
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "phone", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "3wewwe"], ["phone", "fgjhn"], ["created_at", "2023-08-24 22:10:34.785568"], ["updated_at", "2023-08-24 22:10:34.785568"]]
+  ↳ app/controllers/users_controller.rb:29:in `block in create'
+  [1m[36mAddress Create (0.1ms)[0m  [1m[32mINSERT INTO "addresses" ("address", "district", "country", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["address", "ghgh"], ["district", "ghg"], ["country", "hghg"], ["user_id", 2], ["created_at", "2023-08-24 22:10:34.787159"], ["updated_at", "2023-08-24 22:10:34.787159"]]
+  ↳ app/controllers/users_controller.rb:29:in `block in create'
+  [1m[36mTRANSACTION (4.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:29:in `block in create'
+Redirected to http://localhost:3000/users/2
+Completed 302 Found in 10ms (ActiveRecord: 4.8ms | Allocations: 4023)
+
+
+Started GET "/users/2" for ::1 at 2023-08-25 04:10:34 +0600
+Processing by UsersController#show as TURBO_STREAM
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:65:in `set_user'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mAddress Load (0.1ms)[0m  [1m[34mSELECT "addresses".* FROM "addresses" WHERE "addresses"."user_id" = ?[0m  [["user_id", 2]]
+  ↳ app/views/users/show.html.erb:13
+  Rendered users/show.html.erb within layouts/application (Duration: 1.3ms | Allocations: 723)
+  Rendered layout layouts/application.html.erb (Duration: 4.0ms | Allocations: 3252)
+Completed 200 OK in 6ms (Views: 4.4ms | ActiveRecord: 0.2ms | Allocations: 4008)
+
+
+Started GET "/addresses" for ::1 at 2023-08-25 04:10:47 +0600
+Processing by AddressesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering addresses/index.html.erb within layouts/application
+  [1m[36mAddress Load (0.1ms)[0m  [1m[34mSELECT "addresses".* FROM "addresses"[0m
+  ↳ app/views/addresses/index.html.erb:6
+  Rendered addresses/_address.html.erb (Duration: 0.4ms | Allocations: 229)
+  Rendered addresses/index.html.erb within layouts/application (Duration: 1.9ms | Allocations: 1327)
+  Rendered layout layouts/application.html.erb (Duration: 3.6ms | Allocations: 3612)
+Completed 200 OK in 4ms (Views: 3.8ms | ActiveRecord: 0.1ms | Allocations: 3881)
+
+
+Started GET "/" for ::1 at 2023-11-21 17:06:29 +0600
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/manon/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/railties-7.0.7.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/manon/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/railties-7.0.7.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 2.4ms | Allocations: 489)
+Completed 200 OK in 13ms (Views: 6.1ms | ActiveRecord: 0.0ms | Allocations: 4248)
+
+
+Started GET "/new_address" for ::1 at 2023-11-21 17:12:13 +0600
+  
+ActionController::RoutingError (No route matches [GET] "/new_address"):
+  
+Started GET "/new" for ::1 at 2023-11-21 17:12:31 +0600
+  
+ActionController::RoutingError (No route matches [GET] "/new"):
+  
+Started GET "/addresess" for ::1 at 2023-11-21 17:12:53 +0600
+  
+ActionController::RoutingError (No route matches [GET] "/addresess"):
+  
+Started GET "/addresses" for ::1 at 2023-11-21 17:13:06 +0600
+Processing by AddressesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering addresses/index.html.erb within layouts/application
+  [1m[36mAddress Load (0.2ms)[0m  [1m[34mSELECT "addresses".* FROM "addresses"[0m
+  ↳ app/views/addresses/index.html.erb:6
+  Rendered addresses/_address.html.erb (Duration: 0.8ms | Allocations: 262)
+  Rendered addresses/index.html.erb within layouts/application (Duration: 12.9ms | Allocations: 6664)
+  Rendered layout layouts/application.html.erb (Duration: 64.6ms | Allocations: 42678)
+Completed 200 OK in 70ms (Views: 64.0ms | ActiveRecord: 1.6ms | Allocations: 45333)
+
+
+Started GET "/addresses/new" for ::1 at 2023-11-21 17:13:10 +0600
+Processing by AddressesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering addresses/new.html.erb within layouts/application
+  Rendered addresses/_form.html.erb (Duration: 5.0ms | Allocations: 2641)
+  Rendered addresses/new.html.erb within layouts/application (Duration: 6.9ms | Allocations: 2942)
+  Rendered layout layouts/application.html.erb (Duration: 9.1ms | Allocations: 5228)
+Completed 200 OK in 10ms (Views: 9.4ms | ActiveRecord: 0.0ms | Allocations: 5592)
+
+
+Started GET "/users_roles" for ::1 at 2023-11-21 17:13:22 +0600
+  
+ActionController::RoutingError (No route matches [GET] "/users_roles"):
+  
+Started GET "/users" for ::1 at 2023-11-21 17:13:26 +0600
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/users/index.html.erb:6
+  Rendered users/_user.html.erb (Duration: 0.7ms | Allocations: 192)
+  Rendered users/_user.html.erb (Duration: 0.1ms | Allocations: 18)
+  Rendered users/index.html.erb within layouts/application (Duration: 6.2ms | Allocations: 4320)
+  Rendered layout layouts/application.html.erb (Duration: 10.8ms | Allocations: 6711)
+Completed 200 OK in 15ms (Views: 11.2ms | ActiveRecord: 0.6ms | Allocations: 8456)
+
+
+Started GET "/users/new" for ::1 at 2023-11-21 17:13:30 +0600
+Processing by UsersController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (Duration: 3.0ms | Allocations: 2525)
+  Rendered users/new.html.erb within layouts/application (Duration: 3.7ms | Allocations: 2819)
+  Rendered layout layouts/application.html.erb (Duration: 5.8ms | Allocations: 5104)
+Completed 200 OK in 18ms (Views: 6.2ms | ActiveRecord: 0.0ms | Allocations: 8647)
+
+
+Started POST "/users" for ::1 at 2023-11-21 17:13:50 +0600
+Processing by UsersController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"name"=>"3wewwe", "phone"=>"fgjhn", "addresses_attributes"=>{"0"=>{"address"=>"ghgh", "district"=>"ghg", "country"=>"hghg", "_destroy"=>"1"}}}, "commit"=>"Create User"}
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:29:in `block in create'
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "phone", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "3wewwe"], ["phone", "fgjhn"], ["created_at", "2023-11-21 11:13:50.515637"], ["updated_at", "2023-11-21 11:13:50.515637"]]
+  ↳ app/controllers/users_controller.rb:29:in `block in create'
+  [1m[36mTRANSACTION (2.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:29:in `block in create'
+Redirected to http://localhost:3000/users/3
+Completed 302 Found in 7ms (ActiveRecord: 2.5ms | Allocations: 4015)
+
+
+Started GET "/users/3" for ::1 at 2023-11-21 17:13:50 +0600
+Processing by UsersController#show as TURBO_STREAM
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:65:in `set_user'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mAddress Load (0.3ms)[0m  [1m[34mSELECT "addresses".* FROM "addresses" WHERE "addresses"."user_id" = ?[0m  [["user_id", 3]]
+  ↳ app/views/users/show.html.erb:13
+  Rendered users/show.html.erb within layouts/application (Duration: 2.5ms | Allocations: 1707)
+  Rendered layout layouts/application.html.erb (Duration: 4.6ms | Allocations: 4160)
+Completed 200 OK in 7ms (Views: 4.5ms | ActiveRecord: 0.4ms | Allocations: 6447)
+
+
+Started GET "/users/new" for ::1 at 2023-11-21 17:13:56 +0600
+Processing by UsersController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (Duration: 2.0ms | Allocations: 1822)
+  Rendered users/new.html.erb within layouts/application (Duration: 2.2ms | Allocations: 1911)
+  Rendered layout layouts/application.html.erb (Duration: 5.1ms | Allocations: 4196)
+Completed 200 OK in 7ms (Views: 5.6ms | ActiveRecord: 0.0ms | Allocations: 4659)
+
+
+Started GET "/" for ::1 at 2023-11-21 17:58:29 +0600
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/manon/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/railties-7.0.7.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/manon/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/railties-7.0.7.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.5ms | Allocations: 270)
+Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.0ms | Allocations: 833)
+
+
+Started GET "/" for ::1 at 2023-11-21 18:06:56 +0600
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/manon/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/railties-7.0.7.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/manon/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/railties-7.0.7.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.1ms | Allocations: 13)
+Completed 200 OK in 1ms (Views: 0.6ms | ActiveRecord: 0.0ms | Allocations: 212)
+
+
+Started GET "/" for ::1 at 2023-11-21 18:06:57 +0600
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/manon/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/railties-7.0.7.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/manon/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/railties-7.0.7.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.1ms | Allocations: 13)
+Completed 200 OK in 1ms (Views: 0.6ms | ActiveRecord: 0.0ms | Allocations: 211)
+
+
+Started GET "/" for ::1 at 2023-11-21 18:06:57 +0600
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/manon/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/railties-7.0.7.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/manon/.asdf/installs/ruby/3.2.2/lib/ruby/gems/3.2.0/gems/railties-7.0.7.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.1ms | Allocations: 13)
+Completed 200 OK in 1ms (Views: 0.6ms | ActiveRecord: 0.0ms | Allocations: 211)
+
+
+Started GET "/products/1" for ::1 at 2023-11-21 18:07:12 +0600
+  
+ActionController::RoutingError (No route matches [GET] "/products/1"):
+  
+Started GET "/products" for ::1 at 2023-11-21 18:07:16 +0600
+  
+ActionController::RoutingError (No route matches [GET] "/products"):
+  
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "addresses"[0m
+  [1m[35m (9.2ms)[0m  [1m[35mCREATE TABLE "addresses" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "address" varchar, "district" varchar, "country" varchar, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (3.7ms)[0m  [1m[35mCREATE INDEX "index_addresses_on_user_id" ON "addresses" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "phone" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aaddresses" ("id" integer NOT NULL PRIMARY KEY, "address" varchar DEFAULT NULL, "district" varchar DEFAULT NULL, "country" varchar DEFAULT NULL, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_aaddresses_on_user_id" ON "aaddresses" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aaddresses" ("id","address","district","country","user_id","created_at","updated_at")
+                     SELECT "id","address","district","country","user_id","created_at","updated_at" FROM "addresses"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "addresses"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "addresses" ("id" integer NOT NULL PRIMARY KEY, "address" varchar DEFAULT NULL, "district" varchar DEFAULT NULL, "country" varchar DEFAULT NULL, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_48c9e0c5a2"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_addresses_on_user_id" ON "addresses" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "addresses" ("id","address","district","country","user_id","created_at","updated_at")
+                     SELECT "id","address","district","country","user_id","created_at","updated_at" FROM "aaddresses"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "aaddresses"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (2.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (3.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (2.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20230824220324)[0m
+  [1m[35m (2.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20230824220323);
+
+[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2024-02-20 10:39:18.341767"], ["updated_at", "2024-02-20 10:39:18.341767"]]
+  [1m[36mTRANSACTION (2.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "schema_sha1"], ["value", "1be91bc8d4143224bc656c62bf7a7577332e93d5"], ["created_at", "2024-02-20 10:39:18.349919"], ["updated_at", "2024-02-20 10:39:18.349919"]]
+  [1m[36mTRANSACTION (2.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "addresses"[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE TABLE "addresses" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "address" varchar, "district" varchar, "country" varchar, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (3.8ms)[0m  [1m[35mCREATE INDEX "index_addresses_on_user_id" ON "addresses" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "phone" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aaddresses" ("id" integer NOT NULL PRIMARY KEY, "address" varchar DEFAULT NULL, "district" varchar DEFAULT NULL, "country" varchar DEFAULT NULL, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_aaddresses_on_user_id" ON "aaddresses" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "aaddresses" ("id","address","district","country","user_id","created_at","updated_at")
+                     SELECT "id","address","district","country","user_id","created_at","updated_at" FROM "addresses"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "addresses"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "addresses" ("id" integer NOT NULL PRIMARY KEY, "address" varchar DEFAULT NULL, "district" varchar DEFAULT NULL, "country" varchar DEFAULT NULL, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_48c9e0c5a2"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_addresses_on_user_id" ON "addresses" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "addresses" ("id","address","district","country","user_id","created_at","updated_at")
+                     SELECT "id","address","district","country","user_id","created_at","updated_at" FROM "aaddresses"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "aaddresses"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (2.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (3.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (2.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20230824220324)[0m
+  [1m[35m (2.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20230824220323);
+
+[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2024-02-20 10:39:18.395739"], ["updated_at", "2024-02-20 10:39:18.395739"]]
+  [1m[36mTRANSACTION (2.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Update (0.1ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = ?, "updated_at" = ? WHERE "ar_internal_metadata"."key" = ?[0m  [["value", "test"], ["updated_at", "2024-02-20 10:39:18.400760"], ["key", "environment"]]
+  [1m[36mTRANSACTION (2.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "schema_sha1"], ["value", "1be91bc8d4143224bc656c62bf7a7577332e93d5"], ["created_at", "2024-02-20 10:39:18.406570"], ["updated_at", "2024-02-20 10:39:18.406570"]]
+  [1m[36mTRANSACTION (2.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
